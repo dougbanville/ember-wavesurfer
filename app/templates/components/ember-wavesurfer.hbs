@@ -1,3 +1,9 @@
 <h1>Hello</h1>
 <div id="waveform"></div>
+{{#if wavesurferStatus.isPlaying }}
+<button {{action "togglePlayer"}}>Pause</button>
+{{else}}
+<button {{action "togglePlayer"}}>Play</button>
+{{/if}}
+<button {{action "stopPlayer"}}>Stop</button>
 {{yield}}
