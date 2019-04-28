@@ -5,10 +5,12 @@ import { inject as service } from "@ember/service";
 export default Component.extend({
   wavesurferStatus: service(),
 
-  url: `https://s3-eu-west-1.amazonaws.com/audiofile-uploads/english-news/190121011059.mp3`,
-
+  url: null,
   audioRate: 1,
   autoCenter: true,
+  backend: "WebAudio",
+  barGap: null,
+  barHeight: 1,
   waveColor: "violet",
   progressColor: "purple",
   barWidth: null,
@@ -34,6 +36,8 @@ export default Component.extend({
     var wavesurfer = WaveSurfer.create({
       audioRate: this.get("audioRate"),
       autoCenter: this.get("autoCenter"),
+      barHeight: this.get("barHeight"),
+      barGap: this.get("barGap"),
       container: "#waveform",
       waveColor: this.get("waveColor"),
       progressColor: this.get("progressColor"),
@@ -55,13 +59,21 @@ export default Component.extend({
       xhr: this.get("xhr")
     });
     wavesurfer.load(this.get("url"));
+    wavesurfer.on("error", e => {
+      this.set("error", e);
+    });
     this.set("wavesurfer", wavesurfer);
+    this.wavesurferStatus.setWaveSurfer(wavesurfer);
+
+    wavesurfer.on("audioprocess", () => {
+      this.wavesurferStatus.setTime(wavesurfer.getCurrentTime());
+    });
 
     wavesurfer.on("play", () => {
-      this.get("wavesurferStatus").playerStatus("playing");
+      this.wavesurferStatus.playerStatus("playing");
     });
     wavesurfer.on("pause", () => {
-      this.get("wavesurferStatus").playerStatus("paused");
+      this.wavesurferStatus.playerStatus("paused");
     });
     wavesurfer.on("stop", () => {
       this.get("wavesurferStatus").playerStatus("stopped");
@@ -69,15 +81,15 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    this.get("wavesurfer").stop();
+    this.wavesurfer.stop();
   },
 
   actions: {
     togglePlayer() {
-      this.get("wavesurfer").playPause();
+      this.wavesurfer.playPause();
     },
     stopPlayer() {
-      this.get("wavesurfer").stop();
+      this.wavesurfer.stop();
     }
   }
 });
