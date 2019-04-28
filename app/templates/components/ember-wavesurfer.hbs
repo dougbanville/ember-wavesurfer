@@ -1,8 +1,17 @@
 <div id="waveform"></div>
+{{#if error}}
+<p class="wavesurfer--error">{{error}}
+</p>
+{{else}}
+
 {{#if wavesurferStatus.isPlaying }}
 <button {{action "togglePlayer"}} class="wavesurfer--button">Pause</button>
 {{else}}
 <button {{action "togglePlayer"}} class="wavesurfer--button">Play</button>
 {{/if}}
 <button {{action "stopPlayer"}} class="wavesurfer--button">Stop</button>
+
+{{/if}}
+
+
 {{yield}}
