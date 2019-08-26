@@ -1,6 +1,7 @@
-# my-addon
+# Ember Wavesurfer
 
-[Short description of the addon.]
+This is a Emberjs addon for the awesome [Wavesufer.js](https://wavesurfer-js.org/) by [katspaugh](https://github.com/katspaugh/wavesurfer.js).
+[Read the docs here](https://dougbanville.github.io/ember-wavesurfer/docs)
 
 ## Compatibility
 
