@@ -2,7 +2,8 @@
 <div class='container'>
     {{#docs-demo as |demo|}}
         {{#demo.example name='my-demo.hbs'}}
-            <EmberWavesurfer @url="assets/test.mp3" @progressColor="red" @waveColor="green" />
+            <EmberWavesurfer @url="assets/test.mp3" @progressColor="hsla(200, 50%, 70%, 1.0)"
+                @waveColor="rgb(52, 144, 220)" />
         {{/demo.example}}
     {{/docs-demo}}
 </div>
