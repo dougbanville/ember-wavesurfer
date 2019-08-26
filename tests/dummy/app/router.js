@@ -11,6 +11,7 @@ Router.map(function() {
     /* Your docs routes go here */
     this.route("quickstart");
     this.route("example");
+    this.route("troubleshooting");
   });
 });
 
