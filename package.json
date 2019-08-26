@@ -1,11 +1,14 @@
 {
   "name": "ember-wavesurfer",
-  "version": "0.0.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.2",
+  "description": "An Ember Addon for wavesurfer.js",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "audio",
+    "wave surfer",
+    "sound wave"
   ],
-  "repository": "",
+  "repository": "https://github.com/dougbanville/ember-wavesurfer.git",
   "license": "MIT",
   "author": "",
   "directories": {
