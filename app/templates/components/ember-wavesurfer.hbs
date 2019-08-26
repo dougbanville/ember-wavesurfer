@@ -1,15 +1,26 @@
 <div id="waveform"></div>
+<div id="wave-timeline"></div>
 {{#if error}}
-<p class="wavesurfer--error">{{error}}
-</p>
+    <p class="wavesurfer--error">{{error}}
+    </p>
 {{else}}
 
-{{#if wavesurferStatus.isPlaying }}
-<button {{action "togglePlayer"}} class="wavesurfer--button">Pause</button>
-{{else}}
-<button {{action "togglePlayer"}} class="wavesurfer--button">Play</button>
-{{/if}}
-<button {{action "stopPlayer"}} class="wavesurfer--button">Stop</button>
+    {{#unless isReady}}
+        Loading Audio {{percentage}}
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    {{/unless}}
+
+    {{#if wavesurferStatus.isPlaying }}
+        <button {{action "togglePlayer"}} class="wavesurfer--button">Pause</button>
+    {{else}}
+        <button {{action "togglePlayer"}} class="wavesurfer--button">Play</button>
+    {{/if}}
+    <button {{action "stopPlayer"}} class="wavesurfer--button">Stop</button>
 
 {{/if}}
 
