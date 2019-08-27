@@ -6,7 +6,7 @@ import { inject as service } from "@ember/service";
 import { htmlSafe } from "@ember/string";
 
 export default Component.extend({
-  wavesurferStatus: service(),
+  wavesurferService: service(),
 
   isReady: false,
   url: null,
@@ -78,20 +78,25 @@ export default Component.extend({
       this.set("error", e);
     });
     this.set("wavesurfer", wavesurfer);
-    this.wavesurferStatus.setWaveSurfer(wavesurfer);
+    this.wavesurferService.setWaveSurfer(wavesurfer);
 
     wavesurfer.on("audioprocess", () => {
-      this.wavesurferStatus.setTime(wavesurfer.getCurrentTime());
+      //this.wavesurferService.setTime(wavesurfer.getCurrentTime());
+      this.wavesurferService.setProperty("currentTime", wavesurfer.getCurrentTime());
+    });
+
+    wavesurfer.on("ready", () => {
+      this.wavesurferService.setProperty("duration", wavesurfer.getDuration());
     });
 
     wavesurfer.on("play", () => {
-      this.wavesurferStatus.playerStatus("playing");
+      this.wavesurferService.playerStatus("playing");
     });
     wavesurfer.on("pause", () => {
-      this.wavesurferStatus.playerStatus("paused");
+      this.wavesurferService.playerStatus("paused");
     });
     wavesurfer.on("stop", () => {
-      this.wavesurferStatus.playerStatus("stopped");
+      this.wavesurferService.playerStatus("stopped");
     });
 
     wavesurfer.on("loading", percents => {
