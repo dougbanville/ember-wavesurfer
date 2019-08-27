@@ -15,7 +15,7 @@ This is a Emberjs addon for the awesome [Wavesufer.js](https://wavesurfer-js.org
 ## Installation
 
 ```
-ember install my-addon
+ember install ember-wavesurfer
 ```
 
 ## Usage
