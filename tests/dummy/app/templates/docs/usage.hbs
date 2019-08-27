@@ -1,0 +1,33 @@
+<h1>Usage</h1>
+
+Ember Wavesurfer plays on sound at a time. It exposes the service wavesurferService
+
+
+{{#docs-demo as |demo|}}
+    {{#demo.example name='wavesufer-demo2.hbs'}}
+        <p>currentTime: {{ wavesurferService.currentTime }} </p>
+        <p>duration: {{ wavesurferService.duration }}</p>
+        <EmberWavesurfer @url="../assets/GalaxyClass.mp3" />
+    {{/demo.example}}
+    {{demo.snippet 'wavesufer-demo2.hbs'}}
+{{/docs-demo}}
+
+<h1>wavesurferService</h1>
+<p>Access Wavesurfer <a href="https://wavesurfer-js.org/docs/methods.html" target="_blank">methods</a> directly using
+    <strong>wavesurferService.wavesurfer</strong></p>
+
+<p><strong>wavesurferService </strong> will supply isPlaying boolean</p>
+{{#docs-demo as |demo|}}
+    {{#demo.example data-test-id='docs-demo-multiple.hbs'}}
+        {{!-- BEGIN-SNIPPET docs-demo-multiple.hbs --}}
+
+        <button onclick={{action 'playPause'}} class='docs-btn'>
+            {{#if wavesurferService.isPlaying}}Pause{{else}}Play{{/if}}
+        </button>
+
+        {{!-- END-SNIPPET --}}
+    {{/demo.example}}
+
+    {{demo.snippet 'docs-demo-multiple.hbs'}}
+    {{demo.snippet 'docs-demo-multiple.js' label='component.js'}}
+{{/docs-demo}}
