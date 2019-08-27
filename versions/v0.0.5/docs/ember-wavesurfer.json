@@ -1,0 +1,1 @@
+{"jsonapi":{"version":"1.0"},"data":{"type":"project","id":"ember-wavesurfer","attributes":{"name":"ember-wavesurfer","version":"0.0.5","navigationIndex":[]},"relationships":{"modules":{"data":[]}}}}
