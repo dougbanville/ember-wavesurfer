@@ -16,7 +16,7 @@
     {{/unless}}
 
     {{#if controls}}
-        {{#if wavesurferStatus.isPlaying }}
+        {{#if wavesurferService.isPlaying }}
             <button {{action "togglePlayer"}} class="wavesurfer--button">Pause</button>
         {{else}}
             <button {{action "togglePlayer"}} class="wavesurfer--button">Play</button>

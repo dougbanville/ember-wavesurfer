@@ -1,7 +1,15 @@
 <h1>Example</h1>
 {{#docs-demo as |demo|}}
     {{#demo.example name='wavesufer-demo.hbs'}}
-        <EmberWavesurfer @url="../assets/GalaxyClass.mp3" @progressColor="red" @waveColor="green" />
+        <EmberWavesurfer @url="../assets/GalaxyClass.mp3" @progressColor="red" @waveColor="green" @controls="true" />
     {{/demo.example}}
     {{demo.snippet 'wavesufer-demo.hbs'}}
+{{/docs-demo}}
+
+{{#docs-demo as |demo|}}
+    {{#demo.example name='wavesufer-demo-no-controls.hbs'}}
+        <EmberWavesurfer @url="../assets/GalaxyClass.mp3" @waveColor="blue" @hideTimeLine=true @hideScrollbar="true"
+            @controls=true @scrollParent="false" @splitChannels=true @barWidth=1 />
+    {{/demo.example}}
+    {{demo.snippet 'wavesufer-demo-no-controls.hbs'}}
 {{/docs-demo}}

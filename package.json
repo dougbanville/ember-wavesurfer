@@ -1,6 +1,6 @@
 {
   "name": "ember-wavesurfer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An Ember Addon for wavesurfer.js",
   "keywords": [
     "ember-addon",

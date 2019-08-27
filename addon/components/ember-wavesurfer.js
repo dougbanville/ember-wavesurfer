@@ -8,7 +8,7 @@ import { htmlSafe } from "@ember/string";
 export default Component.extend({
   wavesurferService: service(),
 
-  controls: true,
+  controls: false,
   isReady: false,
   url: null,
   audioRate: 1,
@@ -78,7 +78,7 @@ export default Component.extend({
       splitChannels: this.splitChannels,
       xhr: this.xhr
     };
-    if (this.showTimeLine) {
+    if (!this.hideTimeLine) {
       params.plugins = [
         TimelinePlugin.create({
           container: "#" + this.wsId + "wave-timeline"
@@ -127,6 +127,7 @@ export default Component.extend({
 
     wavesurfer.on("play", () => {
       this.wavesurferService.playerStatus("playing");
+      this.wavesurferService.setProperty("id", this.wsId);
     });
     wavesurfer.on("pause", () => {
       this.wavesurferService.playerStatus("paused");
