@@ -8,6 +8,7 @@ import { htmlSafe } from "@ember/string";
 export default Component.extend({
   wavesurferService: service(),
 
+  controls: true,
   isReady: false,
   url: null,
   audioRate: 1,
@@ -35,15 +36,29 @@ export default Component.extend({
   splitChannels: false,
   xhr: null,
   showTimeLine: true,
+  json: false,
+
+  init() {
+    this._super(...arguments);
+    this.set(
+      "wsId",
+      "_" +
+        Math.random()
+          .toString(36)
+          .substr(2, 9)
+    );
+    this.wavesurferService.setProperty("id", this.wsId);
+  },
 
   didInsertElement() {
     this._super(...arguments);
     const params = {
+      backend: "MediaElement",
       audioRate: this.audioRate,
       autoCenter: this.autoCenter,
       barHeight: this.barHeight,
       barGap: this.barGap,
-      container: "#waveform",
+      container: "#" + this.wsId,
       waveColor: this.waveColor,
       progressColor: this.progressColor,
       barWidth: this.barWidth,
@@ -66,14 +81,35 @@ export default Component.extend({
     if (this.showTimeLine) {
       params.plugins = [
         TimelinePlugin.create({
-          container: "#wave-timeline"
+          container: "#" + this.wsId + "wave-timeline"
         }),
         MinimapPlugin.create()
       ];
     }
 
     var wavesurfer = WaveSurfer.create(params);
-    wavesurfer.load(this.url);
+
+    if (this.json) {
+      fetch(this.json)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
+          }
+          return response.json();
+        })
+        .then(peaks => {
+          console.log("loaded peaks! sample_rate: " + peaks.sample_rate);
+
+          // load peaks into wavesurfer.js
+          wavesurfer.load(this.url, peaks.data, "auto");
+        })
+        .catch(e => {
+          console.error("error", e);
+        });
+    } else {
+      wavesurfer.load(this.url);
+    }
+
     wavesurfer.on("error", e => {
       this.set("error", e);
     });

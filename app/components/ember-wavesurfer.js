@@ -1,1 +1,1 @@
-export { default } from 'ember-wavesurfer/components/ember-wavesurfer';
+export { default } from "ember-wavesurfer/components/ember-wavesurfer";
